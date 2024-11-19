@@ -6,17 +6,13 @@ import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 
 export default function Navbar() {
   return (
-    <div className="w-[100vw] h-10 bg-[#00584B] flex justify-between items-center px-7">
+    <div className="w-[100vw] h-10 bg-[#00584B] flex justify-between items-center px-7 font-sassoon">
       <Link href={"/"} className="text-[#D0BD80] text-xl">
         Saket Ghee
       </Link>
       <div className="text-white text-sm flex justify-between w-[20%]">
-        <Link href={"/show-now"} className="">
-          Show Now
-        </Link>
-        <Link href={"/best-deals"} className="">
-          Best Deals
-        </Link>
+        <Link href={"/show-now"}>Show Now</Link>
+        <Link href={"/best-deals"}>Best Deals</Link>
         <Link href={"/about-us"}>About Us</Link>
       </div>
       <div className="w-[6%] flex justify-between">

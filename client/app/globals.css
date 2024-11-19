@@ -3,9 +3,12 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: 'Sassoon Infant Std';
-  src: url('/fonts/SassoonInfantStd.woff2') format('woff2'), /* update if different format */
-       url('/fonts/SassoonInfantStd.woff') format('woff');
+  font-family: "Sassoon Infant Std";
+  src: url("/fonts/SassoonInfantStd.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
+}
+
+body {
+  font-family: "Sassoon Infant Std", sans-serif;
 }
