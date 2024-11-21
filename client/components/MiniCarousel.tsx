@@ -1,6 +1,6 @@
 import { Carousel, IconButton } from "@material-tailwind/react";
 
-export function CarouselDefault({delay}) {
+export function CarouselDefault({ delay }) {
   return (
     <Carousel
       autoplay={true}
