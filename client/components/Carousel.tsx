@@ -1,80 +1,97 @@
-import React from "react";
-import dynamic from "next/dynamic";
-const CCarousel = dynamic(
-  () => import("@coreui/react").then((mod) => mod.CCarousel),
-  { ssr: false }
-);
-const CCarouselItem = dynamic(
-  () => import("@coreui/react").then((mod) => mod.CCarouselItem),
-  { ssr: false }
-);
-const CImage = dynamic(
-  () => import("@coreui/react").then((mod) => mod.CImage),
-  { ssr: false }
-);
+import { Carousel, Typography } from "@material-tailwind/react";
 
-export default function HomeCarousel() {
+export function HomeCarousel() {
   return (
-    <CCarousel controls transition="crossfade" interval={false} className="w-[100vw]">
-      {/* Slide 1 */}
-      <CCarouselItem>
-        <div className="relative">
-          <CImage
-            className="d-block h-72 w-full"
-            src="https://fujilove.com/wp-content/uploads/2017/03/21x9_DSCF1045-1small-scaled.jpg"
-            alt="Slide 1"
-          />
-          {/* Add content */}
-          <div className="absolute bottom-10 left-0 w-full flex justify-center">
-            <div className="text-white text-center">
-              <h3 className="text-2xl font-bold">First Slide Label</h3>
-              <p className="text-lg">
-                Some representative placeholder content for the first slide.
-              </p>
-            </div>
+    <Carousel
+      className="overflow-hidden"
+      loop={true}
+      autoplay={true}
+      autoplayDelay={3000}
+    >
+      <div className="relative h-96 w-full">
+        <img
+          src="https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2560&q=80"
+          alt="image 1"
+          className="h-96 w-full object-cover"
+        />
+        <div className="absolute inset-0 flex justify-center items-end h-96 w-full bg-black/30">
+          <div className="w-3/4 text-center md:w-2/4">
+            <Typography
+              variant="h1"
+              color="white"
+              className="mb-4 text-xl md:text-2xl lg:text-3xl font-sassoon"
+            >
+              The Beauty of Nature
+            </Typography>
+            <Typography
+              variant="lead"
+              color="white"
+              className="mb-12 opacity-80 text-md font-sassoon"
+            >
+              It is not so much for its beauty that the forest makes a claim
+              upon men&apos;s hearts, as for that subtle something, that quality
+              of air that emanation from old trees, that so wonderfully changes
+              and renews a weary spirit.
+            </Typography>
           </div>
         </div>
-      </CCarouselItem>
-
-      {/* Slide 2 */}
-      <CCarouselItem>
-        <div className="relative">
-          <CImage
-            className="d-block h-72 w-full"
-            src="https://i.pinimg.com/originals/eb/f0/02/ebf002d6348c3ae432649da4418fce40.jpg"
-            alt="Slide 2"
-          />
-          {/* Add content */}
-          <div className="absolute bottom-10 left-0 w-full flex justify-center">
-            <div className="text-white text-center">
-              <h3 className="text-2xl font-bold">Second Slide Label</h3>
-              <p className="text-lg">
-                Some representative placeholder content for the second slide.
-              </p>
-            </div>
+      </div>
+      <div className="relative h-96 w-full">
+        <img
+          src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80"
+          alt="image 2"
+          className="h-96 w-full object-cover"
+        />
+        <div className="absolute inset-0 flex justify-center items-end h-96 w-full bg-black/30 text-center">
+          <div className="w-3/4 md:w-2/4">
+            <Typography
+              variant="h1"
+              color="white"
+              className="mb-4 text-xl md:text-2xl lg:text-3xl font-sassoon"
+            >
+              The Beauty of Nature
+            </Typography>
+            <Typography
+              variant="lead"
+              color="white"
+              className="mb-12 opacity-80 text-md"
+            >
+              It is not so much for its beauty that the forest makes a claim
+              upon men&apos;s hearts, as for that subtle something, that quality
+              of air that emanation from old trees, that so wonderfully changes
+              and renews a weary spirit.
+            </Typography>
           </div>
         </div>
-      </CCarouselItem>
-      {/* the sliding animation only seems to be working on this 3rd slide, the upper to just pops up suddenly */}
-      {/* Slide 3 */}
-      <CCarouselItem>
-        <div className="relative">
-          <CImage
-            className="d-block w-full h-72"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNLnWghz2myWlq_4pxfFNZMqCO09trH98wBg&s"
-            alt="Slide 3"
-          />
-          {/* Add content */}
-          <div className="absolute bottom-10 left-0 w-full flex justify-center">
-            <div className="text-white text-center">
-              <h3 className="text-2xl font-bold">Third Slide Label</h3>
-              <p className="text-lg">
-                Some representative placeholder content for the third slide.
-              </p>
-            </div>
+      </div>
+      <div className="relative h-96 w-full">
+        <img
+          src="https://images.unsplash.com/photo-1518623489648-a173ef7824f3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2762&q=80"
+          alt="image 2"
+          className="h-96 w-full object-cover"
+        />
+        <div className="absolute inset-0 flex justify-center items-end h-96 w-full bg-black/30 text-center">
+          <div className="w-3/4 md:w-2/4">
+            <Typography
+              variant="h1"
+              color="white"
+              className="mb-4 text-xl md:text-2xl lg:text-3xl"
+            >
+              The Beauty of Nature
+            </Typography>
+            <Typography
+              variant="lead"
+              color="white"
+              className="mb-12 opacity-80 text-md"
+            >
+              It is not so much for its beauty that the forest makes a claim
+              upon men&apos;s hearts, as for that subtle something, that quality
+              of air that emanation from old trees, that so wonderfully changes
+              and renews a weary spirit.
+            </Typography>
           </div>
         </div>
-      </CCarouselItem>
-    </CCarousel>
+      </div>
+    </Carousel>
   );
 }

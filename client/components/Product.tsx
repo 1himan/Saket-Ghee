@@ -10,7 +10,7 @@ export default function Product({ imageText }) {
       }
     >
       <Image
-        className="rounded-md h-[100px] w-[150px]"
+        className="rounded-md h-[150px] w-[200px]"
         src={`/${imageText}.png`}
         width={150}
         height={100}
