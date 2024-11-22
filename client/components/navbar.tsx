@@ -11,12 +11,11 @@ export default function Navbar() {
         Saket Ghee
       </Link>
       <div className="text-white text-sm flex justify-between w-[20%]">
-        {/*  add some cool on hover animations on these links*/}
         <Link
-          href={"/show-now"}
+          href={"/shop-now"}
           className="hover:text-[#D0BD80] transition-all duration-300"
         >
-          Show Now
+          Shop Now
         </Link>
         <Link
           href={"/best-deals"}
