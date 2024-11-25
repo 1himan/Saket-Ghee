@@ -12,7 +12,7 @@ export default function Navbar() {
       </Link>
       <div className="text-white text-sm flex justify-between w-[20%]">
         <Link
-          href={"/shop-now"}
+          href={"/products"}
           className="hover:text-[#D0BD80] transition-all duration-300"
         >
           Shop Now
