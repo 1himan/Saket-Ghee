@@ -12,10 +12,10 @@ export default function page() {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
   const images = [
-    "/productGhee1.jpg",
-    "/productGhee1.jpg",
-    "/productGhee1.jpg",
-    "/productGhee1.jpg",
+    "/products/ghee3.jpg",
+    "/products/ghee3.jpg",
+    "/products/ghee3.jpg",
+    "/products/ghee3.jpg",
     "https://www.youtube.com/embed/o2FqU2f6DRc",
   ];
 
@@ -40,13 +40,27 @@ export default function page() {
     }
   };
 
+  // Add useEffect to handle body scroll
+  React.useEffect(() => {
+    if (isModalOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    // Cleanup function
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isModalOpen]);
+
   return (
     <div>
       {/* Main Content */}
       <div className="bg-white mx-60 flex justify-evenly mt-7">
         <div className="w-[40%]">
           <Image
-            src={"/productGhee1.jpg"}
+            src={"/products/ghee2.jpg"}
             className="w-full h-[26rem] object-cover"
             alt={"Saket Ghee"}
             width={350}
@@ -115,14 +129,38 @@ export default function page() {
       {/* Image Carousel Modal */}
       {isModalOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
-          onClick={handleOverlayClick} // Added click handler here
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 overflow-hidden"
+          onClick={handleOverlayClick}
         >
-          <div className="bg-white p-4 rounded-md w-[800px]">
-            <button onClick={handleCloseModal} className="mb-2">
-              Close
-            </button>
-            <Carousel selectedItem={selectedImageIndex} showThumbs={false}>
+          <div className="bg-white p-4 rounded-md w-[800px] relative">
+            <div className="flex justify-between items-center mb-4">
+              <button onClick={handleCloseModal} className="text-gray-600 hover:text-gray-800">
+                Close
+              </button>
+              <span className="text-gray-600">
+                {selectedImageIndex + 1} of {images.length}
+              </span>
+            </div>
+            <Carousel 
+              selectedItem={selectedImageIndex} 
+              showThumbs={false}
+              showStatus={false}
+              renderIndicator={(onClickHandler, isSelected, index, label) => {
+                return (
+                  <span
+                    className={`inline-block w-2 h-2 mx-1 rounded-full ${
+                      isSelected ? 'bg-[#00584B]' : 'bg-gray-300'
+                    }`}
+                    onClick={onClickHandler}
+                    onKeyDown={onClickHandler}
+                    key={index}
+                    role="button"
+                    tabIndex={0}
+                    aria-label={`${label} ${index + 1}`}
+                  ></span>
+                );
+              }}
+            >
               {images.map((src, index) => (
                 <div key={index}>
                   {index === images.length - 1 ? (

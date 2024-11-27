@@ -5,7 +5,7 @@ import React from "react";
 
 export default function Product({ imageText }) {
   return (
-    <Tooltip placement="top" arrow title={`Click to see and Buy ${imageText}`}>
+    <Tooltip placement="top" arrow title={`Click to see and Buy ${imageText} Products`}>
       <Link
         href={
           "somewhere back in time I left a part of me I wanna see if you can......"

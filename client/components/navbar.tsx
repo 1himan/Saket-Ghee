@@ -31,7 +31,7 @@ export default function Navbar() {
         </Link>
       </div>
       <div className="w-[6%] flex justify-between">
-        <Link href={"/about-us"}>
+        <Link href={"/cart"}>
           <ShoppingCartIcon sx={{ color: "#ffffff", fontSize: 24 }} />
         </Link>
         <Link href={"/about-us"}>

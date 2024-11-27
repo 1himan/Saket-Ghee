@@ -10,7 +10,7 @@ export default function ProductCard() {
       <div className="flex flex-col gap-2 rounded-xl border border-black w-[250px] h-fit pb-4 bg-blue-gray-00 transition-transform transform hover:scale-105 hover:shadow-lg">
         <div className="overflow-hidden rounded-t-xl">
         <Image
-          src={"/productGhee.png"}
+          src={"/products/ghee1.png"}
           alt={""}
           width={250}
           height={100}
