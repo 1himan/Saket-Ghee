@@ -282,12 +282,12 @@ export default function page() {
 
           <div className="flex items-start gap-4 p-4 border rounded-lg">
             <Image
-              src="/indudidi.png"
+              src="/cutomers/lovely.jpg"
               alt="Customer Avatar"
               width={48}
               height={48}
               className="w-12 h-12 rounded-full object-cover flex-shrink-0"
-            />
+            />  
             <div>
               <h3 className="font-semibold">Priya Sharma</h3>
               <div className="flex items-center gap-2 my-1">

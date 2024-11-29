@@ -18,61 +18,58 @@ export default function CartPage() {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [subtotal, setSubtotal] = useState(0);
 
+  // Load cart items from local storage only on the client side
   useEffect(() => {
-    // In a real app, fetch cart items from API/localStorage
-    const mockItems: CartItem[] = [
-      {
-        id: "1",
-        name: "Pure Desi Ghee",
-        price: 99.99,
-        quantity: 1,
-        volumeSize: "1L",
-        image: "/products/ghee.png",
-        seller: "Organic Foods",
-      },
-      {
-        id: "2",
-        name: "Raw Forest Honey",
-        price: 49.99,
-        quantity: 2,
-        volumeSize: "500ml",
-        image: "/products/Honey.png",
-        seller: "Natural Foods",
-      },
-      {
-        id: "3",
-        name: "Ghee",
-        price: 99.99,
-        quantity: 1,
-        volumeSize: "250gm",
-        image: "/products/ghee2.jpg",
-        seller: "Electronics Store",
-      },
-      // Add more mock items as needed
-    ];
-    setCartItems(mockItems);
-  }, []);
+    if (typeof window !== "undefined") {
+      const storedCartItems = localStorage.getItem("cart");
+      console.log("Loaded from localStorage:", storedCartItems); // Debugging log
+      if (storedCartItems) {
+        const parsedCartItems: CartItem[] = JSON.parse(storedCartItems);
+        setCartItems(parsedCartItems);
+      }
+    }
+  }, []); // Empty dependency array ensures this runs only once on mount
 
+  // Recalculate subtotal whenever cart items change
   useEffect(() => {
     const total = cartItems.reduce(
       (sum, item) => sum + item.price * item.quantity,
       0
     );
     setSubtotal(total);
+
+    // Update local storage whenever cart items change
+    if (typeof window !== "undefined") {
+      localStorage.setItem("cart", JSON.stringify(cartItems));
+    }
   }, [cartItems]);
 
   const updateQuantity = (id: string, newQuantity: number) => {
     if (newQuantity < 1) return;
-    setCartItems((items) =>
-      items.map((item) =>
-        item.id === id ? { ...item, quantity: newQuantity } : item
-      )
+
+    const updatedCartItems = cartItems.map((item) =>
+      item.id === id ? { ...item, quantity: newQuantity } : item
     );
+
+    setCartItems(updatedCartItems);
   };
 
   const removeItem = (id: string) => {
-    setCartItems((items) => items.filter((item) => item.id !== id));
+    const updatedCartItems = cartItems.filter((item) => item.id !== id);
+    setCartItems(updatedCartItems);
   };
+
+  // If cart is empty, show a message
+  if (cartItems.length === 0) {
+    return (
+      <div className="max-w-7xl mx-auto px-4 py-8 text-center">
+        <h1 className="text-3xl font-bold mb-8">Your Cart is Empty</h1>
+        <p className="text-gray-600">
+          Looks like you haven't added any items to your cart yet.
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
@@ -103,14 +100,18 @@ export default function CartPage() {
                     <label className="text-sm text-gray-600 mb-1">Units:</label>
                     <div className="flex items-center border rounded-md">
                       <button
-                        onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                        onClick={() =>
+                          updateQuantity(item.id, item.quantity - 1)
+                        }
                         className="p-2 hover:bg-gray-100"
                       >
                         <FaMinus />
                       </button>
                       <span className="px-4">{item.quantity}</span>
                       <button
-                        onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                        onClick={() =>
+                          updateQuantity(item.id, item.quantity + 1)
+                        }
                         className="p-2 hover:bg-gray-100"
                       >
                         <FaPlus />

@@ -62,56 +62,56 @@ export default function Home() {
     scrollContainerRef.current.scrollBy({ left: 1220, behavior: "smooth" }); // Smooth scroll
   };
 
-  const reviews = [
-    {
-      name: "Himanshu - North Delhi",
-      content:
-        "I was skeptical at first, but the quality of these products is outstanding. Knowing they come directly from farmers makes it even better. Truly fresh and worth every penny!",
-      image: "/himan.png",
-    },
-    {
-      name: "Indu Mahore - South Delhi",
-      content:
-        "I’ve been searching for pure, chemical-free ghee for so long, and I finally found it here. The taste and quality are just like homemade! Highly recommended!",
-      image: "/indudidi.png",
-    },
-    {
-      name: "Himanshu - North Delhi",
-      content:
-        "I was skeptical at first, but the quality of these products is outstanding. Knowing they come directly from farmers makes it even better. Truly fresh and worth every penny!",
-      image: "/himan.png",
-    },
-    {
-      name: "Indu Mahore - South Delhi",
-      content:
-        "I’ve been searching for pure, chemical-free ghee for so long, and I finally found it here. The taste and quality are just like homemade! Highly recommended!",
-      image: "/indudidi.png",
-    },
-    {
-      name: "Himanshu - North Delhi",
-      content:
-        "I was skeptical at first, but the quality of these products is outstanding. Knowing they come directly from farmers makes it even better. Truly fresh and worth every penny!",
-      image: "/himan.png",
-    },
-    {
-      name: "Indu Mahore - South Delhi",
-      content:
-        "I’ve been searching for pure, chemical-free ghee for so long, and I finally found it here. The taste and quality are just like homemade! Highly recommended!",
-      image: "/indudidi.png",
-    },
-    {
-      name: "Himanshu - North Delhi",
-      content:
-        "I was skeptical at first, but the quality of these products is outstanding. Knowing they come directly from farmers makes it even better. Truly fresh and worth every penny!",
-      image: "/himan.png",
-    },
-    {
-      name: "Indu Mahore - South Delhi",
-      content:
-        "I’ve been searching for pure, chemical-free ghee for so long, and I finally found it here. The taste and quality are just like homemade! Highly recommended!",
-      image: "/indudidi.png",
-    },  
-  ];
+const reviews = [
+  {
+    name: "Himanshu - North Delhi",
+    content:
+      "I was skeptical at first, but the quality of these products is outstanding. Knowing they come directly from farmers makes it even better. Truly fresh and worth every penny!",
+    image: "/customers/himan.png",
+  },
+  {
+    name: "Indu Mahore - South Delhi",
+    content:
+      "I’ve been searching for pure, chemical-free ghee for so long, and I finally found it here. The taste and quality are just like homemade! Highly recommended!",
+    image: "/customers/indudidi.png",
+  },
+  {
+    name: "Amit Sharma - Gurgaon",
+    content:
+      "The honey is incredible! It’s thick, natural, and tastes exactly like the honey my grandmother used to bring home. I’ve switched to this for all my sweetener needs.",
+    image: "/customers/lovely.jpg",
+  },
+  {
+    name: "Priya Singh - East Delhi",
+    content:
+      "The ghee has such a rich aroma and flavor. It reminds me of the ghee my mom used to make at home. I love that it’s chemical-free and supports local farmers!",
+    image: "/customers/random1.jpg",
+  },
+  {
+    name: "Rajesh Gupta - Noida",
+    content:
+      "I never thought I’d find such pure and authentic dairy products online. The packaging is excellent, and the delivery was quick. Great experience!",
+    image: "/customers/rajesh.png",
+  },
+  {
+    name: "Meera Joshi - South Delhi",
+    content:
+      "The quality of these products is unmatched. You can tell they are made with love and care. The ghee especially is a must-try. It’s pure gold in a jar!",
+    image: "/customers/meera.png",
+  },
+  {
+    name: "Anjali Verma - West Delhi",
+    content:
+      "Finally, a source I can trust for natural and chemical-free products. The honey and ghee are amazing, and I can’t wait to try more from this brand.",
+    image: "/customers/anjali.png",
+  },
+  {
+    name: "Vikram Rathore - Ghaziabad",
+    content:
+      "As someone who loves cooking, these products have elevated my dishes to another level. The quality is incredible, and the authenticity is unmatched.",
+    image: "/customers/vikram.png",
+  },
+];
 
   return (
     <div className="w-[100vw] bg-slate-00 relative">
@@ -149,7 +149,7 @@ export default function Home() {
       </div>
       <hr className="mx-[15vw] my-10" />
       <p className="text-2xl font-semibold text-gray-700 text-center  ">
-        What are Customers Are Saying About Us
+        What our Customers Are Saying About Us
       </p>
       <div className="relative w-[90vw] mx-auto mb-7">
         {/* Left Arrow */}
@@ -174,7 +174,7 @@ export default function Home() {
                 alt={review.name}
                 width={200}
                 height={100}
-                className="rounded-md"
+                className="h-full w-full rounded-lg"
               />
               <div className="text-center">
                 <p className="text-lg font-semibold mb-2">{review.name}</p>
