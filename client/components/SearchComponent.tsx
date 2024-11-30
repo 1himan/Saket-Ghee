@@ -16,7 +16,8 @@ const SearchComponent = ({ onSearch }: SearchComponentProps) => {
           type="text"
           placeholder="Search for products..."
           className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          onChange={(e) => onSearch(e.target.value)} // Pass the input value to the parent
+          onChange={(e) => onSearch(e.target.value)} // as the user types we're keeping track of the value 
+          // that he/she's typing and then we're sending it to the parent component - prop drilling
         />
       </div>
       <button

@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import RatingStar from "./RatingStars";
 import BasicSelect from "./Select";
 import Link from "next/link";
+import Swal from "sweetalert2";
 
 interface ProductProps {
   _id: string;
@@ -33,38 +34,47 @@ export default function ProductCard({
 }: ProductProps) {
   const [selectedQuantity, setSelectedQuantity] = useState(1);
 
-  const handleAddToCart = (e: React.MouseEvent) => {
-    e.preventDefault(); // Prevent Link navigation when clicking the button
-    
-    // Get existing cart items from localStorage
-    const existingCart = localStorage.getItem('cart');
-    const cartItems = existingCart ? JSON.parse(existingCart) : [];
+const handleAddToCart = (e: React.MouseEvent) => {
+  e.preventDefault(); // Prevent Link navigation when clicking the button
 
-    // Check if item already exists in cart
-    const existingItemIndex = cartItems.findIndex((item: any) => item.id === _id);
+  // Get existing cart items from localStorage
+  const existingCart = localStorage.getItem("cart");
+  const cartItems = existingCart ? JSON.parse(existingCart) : [];
 
-    if (existingItemIndex !== -1) {
-      // Update quantity if item exists
-      cartItems[existingItemIndex].quantity += selectedQuantity;
-    } else {
-      // Add new item if it doesn't exist
-      cartItems.push({
-        id: _id,
-        name,
-        price,
-        quantity: selectedQuantity,
-        volumeSize,
-        image,
-        seller,
-      });
-    }
+  // Check if item already exists in cart
+  const existingItemIndex = cartItems.findIndex((item: any) => item.id === _id);
 
-    // Save updated cart back to localStorage
-    localStorage.setItem('cart', JSON.stringify(cartItems));
-    
-    // Optional: Add some user feedback
-    alert('Item added to cart!');
-  };
+  if (existingItemIndex !== -1) {
+    // Update quantity if item exists
+    cartItems[existingItemIndex].quantity += selectedQuantity;
+  } else {
+    // Add new item if it doesn't exist
+    cartItems.push({
+      id: _id,
+      name,
+      price,
+      quantity: selectedQuantity,
+      size: volumeSize, // Add size explicitly for clarity
+      image,
+      seller,
+    });
+  }
+
+  // Save updated cart back to localStorage
+  localStorage.setItem("cart", JSON.stringify(cartItems));
+
+  // Show a SweetAlert2 toast notification
+  Swal.fire({
+    toast: true,
+    position: "top-end",
+    icon: "success",
+    title: "Item added to cart!",
+    showConfirmButton: false,
+    timer: 1500,
+    timerProgressBar: true,
+  });
+};
+
 
   return (
     <Link href={`/products/${_id}`}>

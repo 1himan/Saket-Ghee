@@ -40,6 +40,7 @@ app.get("/products", async (req, res) => {
       : {}; // No filter if no search query
 
     const products = await Product.find(query); // Fetch filtered or all products
+    console.log(products);
     res.status(200).json(products);
   } catch (error) {
     res

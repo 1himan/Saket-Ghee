@@ -38,10 +38,6 @@ export default function CartPage() {
     );
     setSubtotal(total);
 
-    // Update local storage whenever cart items change
-    if (typeof window !== "undefined") {
-      localStorage.setItem("cart", JSON.stringify(cartItems));
-    }
   }, [cartItems]);
 
   const updateQuantity = (id: string, newQuantity: number) => {
