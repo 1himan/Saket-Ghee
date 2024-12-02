@@ -114,7 +114,7 @@ const reviews = [
 ];
 
   return (
-    <div className="w-[100vw] bg-slate-00 relative">
+    <div className="flex flex-col items-center w-[100vw] bg-slate-00 relative">
       <HomeCarousel />
       <p className="text-xl text-center my-7">Our Harvest Picks</p>
       <ProductContainer />
@@ -128,7 +128,7 @@ const reviews = [
         Experience the taste of authenticity and the goodness of nature,
         delivered from our farms to your home.
       </p>
-      <div className="flex justify-evenly mt-7">
+      <div className="flex flex-wrap justify-evenly mt-7 gap-7">
         <CarouselDefault delay={3000} />
         <CarouselDefault delay={4000} />
         <CarouselDefault delay={5000} />
@@ -148,7 +148,7 @@ const reviews = [
         </div>
       </div>
       <hr className="mx-[15vw] my-10" />
-      <p className="text-2xl font-semibold text-gray-700 text-center  ">
+      <p className="text-2xl font-semibold text-gray-700 text-center">
         What our Customers Are Saying About Us
       </p>
       <div className="relative w-[90vw] mx-auto mb-7">
@@ -162,12 +162,12 @@ const reviews = [
         {/* Scrollable Container */}
         <div
           ref={scrollContainerRef}
-          className="flex justify-evenly mt-7 w-full overflow-x-scroll px-12 no-scrollbar gallery"
+          className="flex flex-nowrap justify-evenly mt-7 w-full overflow-x-scroll px-12 no-scrollbar gallery"
         >
           {reviews.map((review, index) => (
             <div
               key={index}
-              className="lg:min-w-[35vw] mx-14 max-w-[35vw] h-72 bg-yellow-50 rounded-md flex items-center p-7 gap-4"
+              className="flex-shrink-0 lg:min-w-[35vw] mx-14 max-w-[35vw] h-72 bg-yellow-50 rounded-md flex items-center p-7 gap-4"
             >
               <Image
                 src={review.image}

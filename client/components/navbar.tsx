@@ -21,11 +21,11 @@ export default function Navbar() {
           href={"/best-deals"}
           className="hover:text-[#D0BD80] transition-all duration-300"
         >
-          Best Deals
+          Best Deals  
         </Link>
         <Link
           href={"/about-us"}
-          className="hover:text-[#D0BD80] transition-all duration-300"
+          className="hover:text-[#D0BD80] transition-all duration-300"  
         >
           About Us
         </Link>

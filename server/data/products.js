@@ -2,6 +2,13 @@ module.exports = [
   {
     name: "Premium Desi Ghee",
     image: "/products/ghee1.png",
+    images: [
+      "/products/ghee1.png",
+      "/products/ghee1.png",
+      "/products/ghee1.png",
+      "/products/ghee1.png",
+    ],
+    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", // Updated to embed format
     rating: 4.5,
     reviews: 1221,
     price: 897,
@@ -18,6 +25,13 @@ module.exports = [
   {
     name: "Premium Desi Ghee (Variant 2)",
     image: "/products/ghee2.jpg",
+    images: [
+      "/products/ghee2.jpg",
+      "/products/ghee2.jpg",
+      "/products/ghee2.jpg",
+      "/products/ghee2.jpg",
+    ],
+    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", // Updated to embed format
     rating: 4.6,
     reviews: 1000,
     price: 920,
@@ -34,6 +48,13 @@ module.exports = [
   {
     name: "Organic Honey",
     image: "/products/Honey.png",
+    images: [
+      "/products/Honey.png",
+      "/products/Honey.png",
+      "/products/Honey.png",
+      "/products/Honey.png",
+    ],
+    videoUrl: "https://www.youtube.com/embed/o2FqU2f6DRc", // Updated to embed format
     rating: 4.8,
     reviews: 980,
     price: 699,
@@ -50,6 +71,13 @@ module.exports = [
   {
     name: "Fresh Cow Milk (1L)",
     image: "/products/Milk.png",
+    images: [
+      "/products/Milk.png",
+      "/products/Milk.png",
+      "/products/Milk.png",
+      "/products/Milk.png",
+    ],
+    videoUrl: "https://www.youtube.com/embed/o2FqU2f6DRc", // Updated to embed format
     rating: 4.2,
     reviews: 450,
     price: 60,
@@ -66,6 +94,13 @@ module.exports = [
   {
     name: "Natural Almond Oil",
     image: "/products/Oil.png",
+    images: [
+      "/products/Oil.png",
+      "/products/Oil.png",
+      "/products/Oil.png",
+      "/products/Oil.png",
+    ],
+    videoUrl: "https://www.youtube.com/embed/o2FqU2f6DRc", // Updated to embed format
     rating: 4.7,
     reviews: 320,
     price: 499,
@@ -79,24 +114,15 @@ module.exports = [
     isDeleted: false,
   },
   {
-    name: "Herbal Turmeric Powder",
-    image: "/products/Ghee.png",
-    rating: 4.3,
-    reviews: 215,
-    price: 199,
-    originalPrice: 250,
-    discount: 20,
-    size: "100gm",
-    quantityAvailable: 150,
-    seller: "Spice Haven",
-    description:
-      "Pure and herbal turmeric powder for enhanced flavor and health benefits.",
-    category: "Spices",
-    isDeleted: false,
-  },
-  {
     name: "Kashmiri Red Chili Powder",
     image: "/products/Butter.png",
+    images: [
+      "/products/Butter.png",
+      "/products/Butter.png",
+      "/products/Butter.png",
+      "/products/Butter.png",
+    ],
+    videoUrl: "https://www.youtube.com/embed/o2FqU2f6DRc", // Updated to embed format
     rating: 4.6,
     reviews: 785,
     price: 249,
@@ -113,6 +139,13 @@ module.exports = [
   {
     name: "Pure Mustard Oil",
     image: "/products/Butter copy.png",
+    images: [
+      "/products/Butter copy.png",
+      "/products/Butter copy.png",
+      "/products/Butter copy.png",
+      "/products/Butter copy.png",
+    ],
+    videoUrl: "https://www.youtube.com/embed/o2FqU2f6DRc", // Updated to embed format
     rating: 4.4,
     reviews: 567,
     price: 349,
@@ -128,6 +161,13 @@ module.exports = [
   {
     name: "Organic Jaggery",
     image: "/products/ghee2.jpg",
+    images: [
+      "/products/ghee2.jpg",
+      "/products/ghee2.jpg",
+      "/products/ghee2.jpg",
+      "/products/ghee2.jpg",
+    ],
+    videoUrl: "https://www.youtube.com/embed/o2FqU2f6DRc", // Updated to embed format
     rating: 4.7,
     reviews: 632,
     price: 299,
@@ -143,6 +183,13 @@ module.exports = [
   {
     name: "Roasted Peanuts",
     image: "/products/ghee3.jpg",
+    images: [
+      "/products/ghee3.jpg",
+      "/products/ghee3.jpg",
+      "/products/ghee3.jpg",
+      "/products/ghee3.jpg",
+    ],
+    videoUrl: "https://www.youtube.com/embed/o2FqU2f6DRc", // Updated to embed format
     rating: 4.3,
     reviews: 387,
     price: 149,

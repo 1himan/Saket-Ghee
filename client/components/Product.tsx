@@ -7,9 +7,7 @@ export default function Product({ imageText }) {
   return (
     <Tooltip placement="top" arrow title={`Click to see and Buy ${imageText} Products`}>
       <Link
-        href={
-          "somewhere back in time I left a part of me I wanna see if you can......"
-        }
+        href={`/products?search=${encodeURIComponent(imageText)}`}
       >
         <Image
           className="rounded-md h-[150px] w-[200px]"

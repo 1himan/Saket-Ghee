@@ -48,11 +48,16 @@ export default function CartPage() {
     );
 
     setCartItems(updatedCartItems);
+    localStorage.setItem("cart", JSON.stringify(updatedCartItems));
   };
 
   const removeItem = (id: string) => {
+    // Remove item from UI state
     const updatedCartItems = cartItems.filter((item) => item.id !== id);
     setCartItems(updatedCartItems);
+    
+    // Update localStorage
+    localStorage.setItem("cart", JSON.stringify(updatedCartItems));
   };
 
   // If cart is empty, show a message
@@ -111,6 +116,7 @@ export default function CartPage() {
                         className="p-2 hover:bg-gray-100"
                       >
                         <FaPlus />
+                        
                       </button>
                     </div>
                   </div>

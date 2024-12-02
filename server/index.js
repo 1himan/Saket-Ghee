@@ -31,21 +31,59 @@ const Product = require("./models/Product");
 
 // Get all products from database or search based on query
 app.get("/products", async (req, res) => {
-  const { search } = req.query; // Get search query from URL parameters
+  const { search } = req.query;
 
   try {
-    // Build query based on search parameter
     const query = search
-      ? { name: { $regex: search, $options: "i" } } // Case-insensitive partial match
-      : {}; // No filter if no search query
+      ? { name: { $regex: search, $options: "i" } }
+      : {};
 
-    const products = await Product.find(query); // Fetch filtered or all products
-    console.log(products);
+    const products = await Product.find(query);
     res.status(200).json(products);
   } catch (error) {
     res
       .status(500)
       .json({ message: "Error fetching products", error: error.message });
+  }
+});
+
+// Get single product by ID
+app.get("/products/:id", async (req, res) => {
+  try {
+    const product = await Product.findOne({
+      _id: req.params.id,
+      $or: [{ isDeleted: false }, { isDeleted: { $exists: false } }]
+    });
+
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    // Transform the data to match the frontend interface
+    const transformedProduct = {
+      _id: product._id,
+      name: product.name,
+      description: product.description || "",
+      price: product.price,
+      originalPrice: product.originalPrice,
+      discount: product.discount,
+      images: product.images || [product.image],
+      videoUrl: product.videoUrl || undefined,
+      sizes: product.size ? [product.size] : [],
+      rating: product.rating,
+      reviews: product.reviews,
+      quantityAvailable: product.quantityAvailable
+    };
+    console.log(transformedProduct);
+    res.status(200).json(transformedProduct);
+  } catch (error) {
+    if (error.name === 'CastError') {
+      return res.status(400).json({ message: "Invalid product ID format" });
+    }
+    res.status(500).json({ 
+      message: "Error fetching product", 
+      error: error.message 
+    });
   }
 });
 
