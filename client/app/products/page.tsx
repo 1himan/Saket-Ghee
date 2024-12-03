@@ -1,11 +1,10 @@
-//client/app/products/page.tsx
 "use client";
 import { useState, useEffect } from "react";
 import ProductCard from "@/components/ProductCard";
 import SearchComponent from "@/components/SearchComponent";
-import { useSearchParams } from 'next/navigation';
-import Swal from 'sweetalert2';
+import { useSearchParams } from "next/navigation";
 
+// Define the Product type
 interface Product {
   _id: string;
   name: string;
@@ -18,10 +17,15 @@ interface Product {
   quantityAvailable: number;
 }
 
-async function fetchProducts(searchQuery = ""): Promise<Product[]> {
+// Function to fetch products from the server
+async function fetchProducts(
+  searchQuery = "",
+  page = 1,
+  limit = 20
+): Promise<{ products: Product[]; totalResults: number }> {
   try {
     const res = await fetch(
-      `http://localhost:5000/products?search=${searchQuery}`,
+      `http://localhost:5000/products?search=${searchQuery}&page=${page}&limit=${limit}`,
       {
         cache: "no-store", // Ensure fresh data
       }
@@ -30,98 +34,93 @@ async function fetchProducts(searchQuery = ""): Promise<Product[]> {
     if (!res.ok) {
       throw new Error("Failed to fetch products");
     }
-    // after succesfull getting the data from the server we can return this to
-    // our fetchedProducts variable.
-    // But I don't understand one thing that - why are we using res.json here?
-    // I mean .json() - what does this method do exactly and by do we need it?
-    return res.json();
+
+    // Return the JSON response which includes both products and totalResults
+    return res.json(); // { products: [...], totalResults: 200 }
   } catch (error) {
     console.error("Error loading products:", error);
-    return [];
+    return { products: [], totalResults: 0 };
   }
 }
 
 export default function Page() {
   const searchParams = useSearchParams();
   const [products, setProducts] = useState<Product[]>([]);
-  const [searchQuery, setSearchQuery] = useState(searchParams.get('search') || "");
+  const [searchQuery, setSearchQuery] = useState(
+    searchParams.get("search") || ""
+  );
+  const [totalResults, setTotalResults] = useState(0);
+  const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
 
-  // Initialize search from URL parameter
-  useEffect(() => {
-    const searchFromUrl = searchParams.get('search');
-    if (searchFromUrl) {
-      setSearchQuery(searchFromUrl);
-    }
-  }, [searchParams]);
+  // Fetch products based on the current searchQuery and page
+  const loadProducts = async () => {
+    if (isLoading || !hasMore) return; // Prevent duplicate fetch calls
 
-  // Function to handle adding a product to the cart
-  const handleAddToCart = (product: Product) => {
-    const cartItem = {
-      id: product._id,
-      name: product.name,
-      price: product.price,
-      quantity: 1, // Default quantity
-      image: product.image,
-      seller: "Saket Ghee" // You might want to make this dynamic too
-    };
+    setIsLoading(true);
+    const { products: newProducts, totalResults } = await fetchProducts(
+      searchQuery,
+      page
+    );
 
-    // Get existing cart items
-    const existingCart = JSON.parse(localStorage.getItem('cart') || '[]');
-    
-    // Check if item already exists
-    const existingItemIndex = existingCart.findIndex((item: any) => item.id === product._id);
-    
-    if (existingItemIndex !== -1) {
-      // Update quantity if item exists
-      existingCart[existingItemIndex].quantity += 1;
-    } else {
-      // Add new item if it doesn't exist
-      existingCart.push(cartItem);
-    }
-
-    // Save back to localStorage
-    localStorage.setItem('cart', JSON.stringify(existingCart));
-    alert('Product added to cart!');
+    setProducts((prev) => [...prev, ...newProducts]); // Append new products to the current list
+    setTotalResults(totalResults); // Update total results count
+    setHasMore(newProducts.length > 0); // Check if more products are available
+    setPage((prev) => prev + 1); // Increment the page number
+    setIsLoading(false);
   };
 
-  // Fetch products whenever the search query changes
+  // Handle search query change
   useEffect(() => {
-    const loadProducts = async () => {
-      setIsLoading(true);
-      const fetchedProducts = await fetchProducts(searchQuery);
-      setProducts(fetchedProducts);
-      setIsLoading(false);
-    };
-
-    const debounceTimer = setTimeout(() => {
-      loadProducts();
-    }, 300);
-
-    return () => clearTimeout(debounceTimer);
+    setProducts([]); // Clear the product list
+    setPage(1); // Reset page to 1
+    setHasMore(true); // Allow fetching new results
+    loadProducts(); // Load products for the new search query
   }, [searchQuery]);
+
+  // Infinite scroll implementation using IntersectionObserver
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          loadProducts(); // Fetch the next set of products when the trigger is visible
+        }
+      },
+      { threshold: 1.0 }
+    );
+
+    const target = document.querySelector("#infinite-scroll-trigger");
+    if (target) observer.observe(target);
+
+    return () => observer.disconnect(); // Clean up the observer
+  }, []);
 
   return (
     <div className="container mx-auto px-4">
-      {/* Search bar with proper spacing and visibility */}
+      {/* Search Component */}
       <div className="my-6">
-        <SearchComponent 
-          onSearch={(value) => setSearchQuery(value)} 
+        <SearchComponent
+          onSearch={(value) => setSearchQuery(value)}
           initialValue={searchQuery}
         />
       </div>
 
-      {isLoading && <p className="text-center">Loading...</p>}
-      
-      <div className="bg-blue-gray-00 justify-center flex flex-wrap gap-4 bg-gray-00 mb-7">
-        <div className="bg-blue-gray-00 flex flex-wrap gap-5 w-[90%]">
-          {products.map((product) => (
-            <div key={product._id}>
-              <ProductCard {...product} />
-            </div>
-          ))}
-        </div>
+      {/* Total Results */}
+      <p className="text-left mb-4">{totalResults} results for your search</p>
+
+      {/* Product List */}
+      <div className="flex flex-wrap gap-5 px-16">
+        {products.map((product,index) => (
+          <ProductCard key={index} {...product} />
+        ))}
       </div>
+
+      {/* Loading Indicator */}
+      {isLoading && <p className="text-center mt-6">Loading...</p>}
+
+      {/* Infinite Scroll Trigger */}
+      <div id="infinite-scroll-trigger" style={{ height: "20px" }} />
     </div>
   );
 }

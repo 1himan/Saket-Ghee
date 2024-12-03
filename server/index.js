@@ -28,18 +28,21 @@ app.get("/", (req, res) => {
 
 // Import the Product model
 const Product = require("./models/Product");
-
-// Get all products from database or search based on query
 app.get("/products", async (req, res) => {
-  const { search } = req.query;
+  const { search, page = 1, limit = 20 } = req.query;
 
   try {
-    const query = search
-      ? { name: { $regex: search, $options: "i" } }
-      : {};
+    const query = search ? { name: { $regex: search, $options: "i" } } : {};
 
-    const products = await Product.find(query);
-    res.status(200).json(products);
+    const skip = (page - 1) * limit;
+
+    // Fetch products with pagination
+    const products = await Product.find(query).skip(skip).limit(Number(limit));
+
+    // Get the total count of matching products
+    const totalResults = await Product.countDocuments(query);
+
+    res.status(200).json({ products, totalResults });
   } catch (error) {
     res
       .status(500)
@@ -52,7 +55,7 @@ app.get("/products/:id", async (req, res) => {
   try {
     const product = await Product.findOne({
       _id: req.params.id,
-      $or: [{ isDeleted: false }, { isDeleted: { $exists: false } }]
+      $or: [{ isDeleted: false }, { isDeleted: { $exists: false } }],
     });
 
     if (!product) {
@@ -72,17 +75,17 @@ app.get("/products/:id", async (req, res) => {
       sizes: product.size ? [product.size] : [],
       rating: product.rating,
       reviews: product.reviews,
-      quantityAvailable: product.quantityAvailable
+      quantityAvailable: product.quantityAvailable,
     };
     console.log(transformedProduct);
     res.status(200).json(transformedProduct);
   } catch (error) {
-    if (error.name === 'CastError') {
+    if (error.name === "CastError") {
       return res.status(400).json({ message: "Invalid product ID format" });
     }
-    res.status(500).json({ 
-      message: "Error fetching product", 
-      error: error.message 
+    res.status(500).json({
+      message: "Error fetching product",
+      error: error.message,
     });
   }
 });

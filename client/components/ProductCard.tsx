@@ -29,7 +29,6 @@ export default function ProductCard({
   originalPrice,
   discount,
   quantityAvailable,
-  seller,
   volumeSize,
 }: ProductProps) {
   const [selectedQuantity, setSelectedQuantity] = useState(1);
