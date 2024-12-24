@@ -34,7 +34,7 @@ export default function Navbar() {
         <Link href={"/cart"}>
           <ShoppingCartIcon sx={{ color: "#ffffff", fontSize: 24 }} />
         </Link>
-        <Link href={"/about-us"}>
+        <Link href={"/user"}>
           <PersonOutlineIcon sx={{ color: "#ffffff", fontSize: 24 }} />
         </Link>
       </div>

@@ -18,7 +18,7 @@ export default function Home() {
     const handleWheel = (e) => {
       // ensure that the browser doesn't perform its default scrolling behavior.
       e.preventDefault();
-      // e.deltaY: Represents the vertical scroll amount from the user's mouse wheel.
+      // e.deltaY: Represents the vertical scroll amount from the user's mouse wheel
       scrollContainer.scrollLeft += e.deltaY;
     };
 
@@ -63,7 +63,6 @@ export default function Home() {
   const scrollRight = () => {
     scrollContainerRef.current.scrollBy({ left: 1220, behavior: "smooth" }); // Smooth scroll
   };
-
 
   return (
     <div className="flex flex-col items-center w-[100vw] bg-slate-00 relative">
@@ -113,7 +112,6 @@ export default function Home() {
         </button>
         {/* Scrollable Container */}
         <div
-        // right here its used? what is this ref?
           ref={scrollContainerRef}
           className="flex flex-nowrap justify-evenly mt-7 w-full overflow-x-scroll px-12 no-scrollbar gallery"
         >
@@ -123,7 +121,7 @@ export default function Home() {
               className="flex-shrink-0 lg:min-w-[35vw] mx-14 max-w-[35vw] h-72 bg-yellow-50 rounded-md flex items-center p-7 gap-4"
             >
               <Image
-                src={review.image}
+                src={review.image || "/customers/image.png"}
                 alt={review.name}
                 width={200}
                 height={100}

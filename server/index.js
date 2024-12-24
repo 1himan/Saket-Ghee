@@ -7,12 +7,26 @@ require("dotenv").config();
 const app = express();
 app.use(cors());
 app.use(express.json());
+// app.use(
+//   session({
+//     secret: process.env.SESSION_SECRET || "your_secret_key", // Set a secret key (replace with your own)
+//     resave: false,
+//     saveUninitialized: false,
+//     store: MongoStore.create({
+//       mongoUrl: "mongodb://localhost:27017/saketGhee", // Use the same MongoDB URL
+//     }),
+//     cookie: { secure: false, httpOnly: true, maxAge: 3600000 }, // 1 hour
+//   })
+// );
+// Initialize Passport and session management
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 // MongoDB connection
 mongoose
   .connect("mongodb://localhost:27017/saketGhee", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
+    // useNewUrlParser: true,
+    // useUnifiedTopology: true,
   })
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.error("MongoDB connection error:", err));
@@ -30,7 +44,8 @@ app.get("/", (req, res) => {
 const Product = require("./models/Product");
 app.get("/products", async (req, res) => {
   const { search, page = 1, limit = 20 } = req.query;
-
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+  console.log(req.query);
   try {
     const query = search ? { name: { $regex: search, $options: "i" } } : {};
 
@@ -89,6 +104,10 @@ app.get("/products/:id", async (req, res) => {
     });
   }
 });
+
+const userRoutes = require("./routes/userRoutes");
+// Use the authentication routes
+app.use("/api/users", userRoutes);
 
 // Admin Routes
 app.post("/products", (req, res) => {

@@ -84,7 +84,9 @@ export default function page() {
   };
 
   if (isLoading) {
-    return <div className="text-center py-10">Loading...</div>;
+    return (
+      <div className="text-center text-2xl text-gray-700 py-10">Loading...</div>
+    );
   }
 
   if (!product) {
@@ -134,8 +136,8 @@ export default function page() {
   return (
     <div>
       {/* Main Content */}
-      <div className="bg-white mx-60 flex justify-evenly mt-7">
-        <div className="w-[40%]">
+      <div className="bg-white mx-4 lg:mx-60 flex flex-col lg:flex-row justify-evenly mt-7">
+        <div className="w-full lg:w-[40%]">
           <Image
             src={product.images[0]}
             className="w-full h-[26rem] object-cover"
@@ -166,7 +168,7 @@ export default function page() {
             )}
           </div>
         </div>
-        <div className="w-[40%]">
+        <div className="w-full lg:w-[40%] mt-4 lg:mt-0">
           <p className="text-2xl font-semibold mb-2">{product.name}</p>
           <div className="flex items-center gap-2">
             <RatingStar rating={product.rating} />
@@ -207,12 +209,12 @@ export default function page() {
           </div>
           {/* Action Buttons */}
           <div className="mt-4 flex flex-col gap-4">
-            <button className="bg-[#FFA500] text-white px-4 py-2 mr-28 rounded-md">
+            <button className="bg-[#FFA500] text-white px-4 py-2 rounded-md">
               Buy Now
             </button>
             <button 
               onClick={handleAddToCart}
-              className="bg-gray-300 text-black px-4 py-2 rounded-md mr-28"
+              className="bg-gray-300 text-black px-4 py-2 rounded-md"
             >
               Add to Cart
             </button>
@@ -221,7 +223,7 @@ export default function page() {
       </div>
 
       {/* Product Description */}
-      <div className="bg-white mx-60 mt-8 p-6">
+      <div className="bg-white mx-4 lg:mx-60 mt-8 p-6">
         <h2 className="text-2xl font-semibold mb-4">More About this Product</h2>
         <div className="text-gray-700">
           <p className="mb-4">{product.description}</p>
@@ -234,7 +236,7 @@ export default function page() {
           className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 overflow-hidden"
           onClick={handleOverlayClick}
         >
-          <div className="bg-white p-4 rounded-md w-[800px] relative">
+          <div className="bg-white p-4 rounded-md w-[90%] lg:w-[800px] relative">
             <div className="flex justify-between items-center mb-4">
               <button onClick={handleCloseModal} className="text-gray-600 hover:text-gray-800">
                 Close

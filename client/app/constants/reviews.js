@@ -27,24 +27,24 @@ export const reviews = [
     name: "Rajesh Gupta - Noida",
     content:
       "I never thought I’d find such pure and authentic dairy products online. The packaging is excellent, and the delivery was quick. Great experience!",
-    image: "/customers/rajesh.png",
+    image: "/customers/image.png",
   },
   {
     name: "Meera Joshi - South Delhi",
     content:
       "The quality of these products is unmatched. You can tell they are made with love and care. The ghee especially is a must-try. It’s pure gold in a jar!",
-    image: "/customers/meera.png",
+    image: "/customers/image.png",
   },
   {
     name: "Anjali Verma - West Delhi",
     content:
       "Finally, a source I can trust for natural and chemical-free products. The honey and ghee are amazing, and I can’t wait to try more from this brand.",
-    image: "/customers/anjali.png",
+    image: "/customers/image.png",
   },
   {
     name: "Vikram Rathore - Ghaziabad",
     content:
       "As someone who loves cooking, these products have elevated my dishes to another level. The quality is incredible, and the authenticity is unmatched.",
-    image: "/customers/vikram.png",
+    image: "/customers/image.png",
   },
 ];
