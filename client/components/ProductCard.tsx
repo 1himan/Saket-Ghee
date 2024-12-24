@@ -15,8 +15,12 @@ interface ProductProps {
   originalPrice: number;
   discount: number;
   quantityAvailable: number;
-  seller: string;
+  seller: string; // Add missing seller property
   volumeSize: string;
+}
+
+interface BasicSelectProps {
+  maxQuantity: number;
 }
 
 export default function ProductCard({
@@ -30,6 +34,7 @@ export default function ProductCard({
   discount,
   quantityAvailable,
   volumeSize,
+  seller,
 }: ProductProps) {
   const [selectedQuantity, setSelectedQuantity] = useState(1);
 
@@ -38,10 +43,10 @@ const handleAddToCart = (e: React.MouseEvent) => {
 
   // Get existing cart items from localStorage
   const existingCart = localStorage.getItem("cart");
-  const cartItems = existingCart ? JSON.parse(existingCart) : [];
+  const cartItems: { id: string; name: string; price: number; quantity: number; size: string; image: string; seller: string }[] = existingCart ? JSON.parse(existingCart) : [];
 
   // Check if item already exists in cart
-  const existingItemIndex = cartItems.findIndex((item: any) => item.id === _id);
+  const existingItemIndex = cartItems.findIndex((item) => item.id === _id);
 
   if (existingItemIndex !== -1) {
     // Update quantity if item exists
@@ -55,6 +60,7 @@ const handleAddToCart = (e: React.MouseEvent) => {
       quantity: selectedQuantity,
       size: volumeSize, // Add size explicitly for clarity
       image,
+      // No value exists in scope for the shorthand property 'seller'. Either declare one or provide an initializer.ts(18004)
       seller,
     });
   }
@@ -92,7 +98,7 @@ const handleAddToCart = (e: React.MouseEvent) => {
         <div className="px-3 flex flex-col gap-3">
           <p className="text-xl text-center">{name}</p>
           <div className="flex gap-2">
-            <RatingStar value={rating} />
+            <RatingStar rating={rating} />
             <span className="text-xs">on {reviews} Reviews</span>
           </div>
           <div className="flex items-center gap-2">
@@ -110,7 +116,7 @@ const handleAddToCart = (e: React.MouseEvent) => {
             <button className="flex-1 bg-[#FFA500] text-white py-2 rounded-md hover:bg-[#FF8C00] hover:opacity-90 transition-all">
               Buy Now
             </button>
-            <button 
+            <button
               onClick={handleAddToCart}
               className="flex-1 bg-[#D0BD80] text-white py-2 rounded-md hover:bg-[#C5AE72] hover:opacity-90 transition-all"
             >

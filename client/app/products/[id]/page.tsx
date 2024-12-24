@@ -22,7 +22,7 @@ interface Product {
   quantityAvailable: number;
 }
 
-export default function page() {
+export default function Page() {
   const params = useParams();
   const [product, setProduct] = useState<Product | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -33,14 +33,16 @@ export default function page() {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/products/${params.id}`);
+        const response = await fetch(
+          `http://localhost:5000/products/${params.id}`
+        );
         if (!response.ok) {
-          throw new Error('Product not found');
+          throw new Error("Product not found");
         }
         const data = await response.json();
         setProduct(data);
       } catch (error) {
-        console.error('Error fetching product:', error);
+        console.error("Error fetching product:", error);
       } finally {
         setIsLoading(false);
       }
@@ -61,15 +63,17 @@ export default function page() {
       quantity: quantity,
       volumeSize: product.sizes[0], // Default to first size
       image: product.images[0],
-      seller: "Saket Ghee" // You might want to make this dynamic too
+      seller: "Saket Ghee", // You might want to make this dynamic too
     };
 
     // Get existing cart items
-    const existingCart = JSON.parse(localStorage.getItem('cart') || '[]');
-    
+    const existingCart = JSON.parse(localStorage.getItem("cart") || "[]");
+
     // Check if item already exists
-    const existingItemIndex = existingCart.findIndex((item: any) => item.id === product._id);
-    
+    const existingItemIndex = existingCart.findIndex(
+      (item: any) => item.id === product._id
+    );
+
     if (existingItemIndex !== -1) {
       // Update quantity if item exists
       existingCart[existingItemIndex].quantity += quantity;
@@ -79,8 +83,8 @@ export default function page() {
     }
 
     // Save back to localStorage
-    localStorage.setItem('cart', JSON.stringify(existingCart));
-    alert('Product added to cart!');
+    localStorage.setItem("cart", JSON.stringify(existingCart));
+    alert("Product added to cart!");
   };
 
   if (isLoading) {
@@ -112,26 +116,11 @@ export default function page() {
     setIsModalOpen(true);
   };
 
-  // New function to handle overlay clicks
   const handleOverlayClick = (e: React.MouseEvent) => {
     if (e.target === e.currentTarget) {
       setIsModalOpen(false);
     }
   };
-
-  // Add useEffect to handle body scroll
-  // React.useEffect(() => {
-  //   if (isModalOpen) {
-  //     document.body.style.overflow = 'hidden';
-  //   } else {
-  //     document.body.style.overflow = 'unset';
-  //   }
-
-  //   // Cleanup function
-  //   return () => {
-  //     document.body.style.overflow = 'unset';
-  //   };
-  // }, [isModalOpen]);
 
   return (
     <div>
@@ -176,8 +165,12 @@ export default function page() {
           </div>
           <div className="flex items-center gap-2 mt-2">
             <p className="text-lg font-bold">₹{product.price}</p>
-            <p className="text-sm line-through text-gray-500">₹{product.originalPrice}</p>
-            <p className="text-sm text-green-500 font-bold">{product.discount}% off</p>
+            <p className="text-sm line-through text-gray-500">
+              ₹{product.originalPrice}
+            </p>
+            <p className="text-sm text-green-500 font-bold">
+              {product.discount}% off
+            </p>
           </div>
           {/* Size Options */}
           <div className="mt-3">
@@ -193,14 +186,14 @@ export default function page() {
           {/* Quantity Selector */}
           <div className="mt-4 flex items-center gap-2">
             <p className="text-sm font-semibold">Quantity:</p>
-            <button 
+            <button
               className="border px-2"
               onClick={() => quantity > 1 && setQuantity(quantity - 1)}
             >
               -
             </button>
             <span className="px-2">{quantity}</span>
-            <button 
+            <button
               className="border px-2"
               onClick={() => setQuantity(quantity + 1)}
             >
@@ -212,7 +205,7 @@ export default function page() {
             <button className="bg-[#FFA500] text-white px-4 py-2 rounded-md">
               Buy Now
             </button>
-            <button 
+            <button
               onClick={handleAddToCart}
               className="bg-gray-300 text-black px-4 py-2 rounded-md"
             >
@@ -238,22 +231,25 @@ export default function page() {
         >
           <div className="bg-white p-4 rounded-md w-[90%] lg:w-[800px] relative">
             <div className="flex justify-between items-center mb-4">
-              <button onClick={handleCloseModal} className="text-gray-600 hover:text-gray-800">
+              <button
+                onClick={handleCloseModal}
+                className="text-gray-600 hover:text-gray-800"
+              >
                 Close
               </button>
               <span className="text-gray-600">
                 {selectedImageIndex + 1} of {allMedia.length}
               </span>
             </div>
-            <Carousel 
-              selectedItem={selectedImageIndex} 
+            <Carousel
+              selectedItem={selectedImageIndex}
               showThumbs={false}
               showStatus={false}
               renderIndicator={(onClickHandler, isSelected, index, label) => {
                 return (
                   <span
                     className={`inline-block w-2 h-2 mx-1 rounded-full ${
-                      isSelected ? 'bg-[#00584B]' : 'bg-gray-300'
+                      isSelected ? "bg-[#00584B]" : "bg-gray-300"
                     }`}
                     onClick={onClickHandler}
                     onKeyDown={onClickHandler}

@@ -3,7 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-export default function Product({ imageText }) {
+interface ProductProps {
+  imageText: string;
+}
+
+export default function Product({ imageText }: ProductProps) {
   return (
     <Tooltip placement="top" arrow title={`Click to see and Buy ${imageText} Products`}>
       <Link

@@ -1,19 +1,20 @@
 import { Carousel, IconButton } from "@material-tailwind/react";
 
-export function CarouselDefault({ delay }) {
+export function CarouselDefault({ delay }: { delay: number }) {
   return (
     <Carousel
       autoplay={true}
       autoplayDelay={delay}
       loop={true}
       className="rounded-xl w-96 h-96"
-      prevArrow={({ handlePrev }) => (
+      prevArrow={({ handlePrev }: { handlePrev: () => void }) => (
         <IconButton
           variant="text"
           color="white"
           size="sm"
           onClick={handlePrev}
           className="!absolute top-2/4 left-4 -translate-y-2/4"
+          placeholder=""
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -31,19 +32,20 @@ export function CarouselDefault({ delay }) {
           </svg>
         </IconButton>
       )}
-      nextArrow={({ handleNext }) => (
+      nextArrow={({ handleNext }: { handleNext: () => void }) => (
         <IconButton
           variant="text"
           color="white"
           size="lg"
           onClick={handleNext}
           className="!absolute top-2/4 !right-4 -translate-y-2/4"
+          placeholder=""
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            strokeWidth="1.5"
+            strokeWidth={1.5}
             stroke="currentColor"
             className="size-6"
           >

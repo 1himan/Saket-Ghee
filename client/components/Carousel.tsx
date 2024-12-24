@@ -1,6 +1,6 @@
 import { Carousel, Typography } from "@material-tailwind/react";
 
-export function HomeCarousel() {
+export function HomeCarousel(): JSX.Element {
   return (
     <Carousel
       className="overflow-hidden"
@@ -54,7 +54,7 @@ export function HomeCarousel() {
             <Typography
               variant="lead"
               color="white"
-              className="mb-12 opacity-80 text-md"
+              className="mb-12 opacity-80 text-md font-sassoon"
             >
               It is not so much for its beauty that the forest makes a claim
               upon men&apos;s hearts, as for that subtle something, that quality
@@ -75,14 +75,14 @@ export function HomeCarousel() {
             <Typography
               variant="h1"
               color="white"
-              className="mb-4 text-xl md:text-2xl lg:text-3xl"
+              className="mb-4 text-xl md:text-2xl lg:text-3xl font-sassoon"
             >
               The Beauty of Nature
             </Typography>
             <Typography
               variant="lead"
               color="white"
-              className="mb-12 opacity-80 text-md"
+              className="mb-12 opacity-80 text-md font-sassoon"
             >
               It is not so much for its beauty that the forest makes a claim
               upon men&apos;s hearts, as for that subtle something, that quality

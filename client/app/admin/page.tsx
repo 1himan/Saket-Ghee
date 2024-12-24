@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, ReactNode } from 'react'
 import {
   BarChart,
   Users,
@@ -10,6 +10,19 @@ import {
   CreditCard,
   Bell,
 } from 'lucide-react'
+
+interface SidebarLinkProps {
+  icon: ReactNode;
+  label: string;
+  active: boolean;
+  onClick: () => void;
+}
+
+interface StatCardProps {
+  title: string;
+  value: string;
+  icon: ReactNode;
+}
 
 export default function Admin() {
   const [activeTab, setActiveTab] = useState('dashboard')
@@ -144,7 +157,7 @@ export default function Admin() {
 }
 
 // Sidebar Link Component
-function SidebarLink({ icon, label, active, onClick }) {
+function SidebarLink({ icon, label, active, onClick }: SidebarLinkProps) {
   return (
     <button
       onClick={onClick}
@@ -159,7 +172,7 @@ function SidebarLink({ icon, label, active, onClick }) {
 }
 
 // Stat Card Component
-function StatCard({ title, value, icon }) {
+function StatCard({ title, value, icon }: StatCardProps) {
   return (
     <div className="bg-white p-6 rounded-lg shadow-sm">
       <div className="flex items-center justify-between">

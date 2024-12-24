@@ -10,28 +10,26 @@ import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { reviews } from "./constants/Reviews";
 
 export default function Home() {
-  // This ref is used to directly interact with the DOM element (the scrollable container for the reviews).
-  const scrollContainerRef = useRef(null);
+  const scrollContainerRef = useRef<HTMLDivElement | null>(null);
+
   useEffect(() => {
     const scrollContainer = scrollContainerRef.current;
-    // Enable horizontal scrolling with the mouse wheel
-    const handleWheel = (e) => {
-      // ensure that the browser doesn't perform its default scrolling behavior.
+    if (!scrollContainer) return;
+
+    const handleWheel = (e: WheelEvent) => {
       e.preventDefault();
-      // e.deltaY: Represents the vertical scroll amount from the user's mouse wheel
       scrollContainer.scrollLeft += e.deltaY;
     };
 
-    // Enable touch gestures for scrolling
-    let startX, scrollLeft;
-    const handleStart = (e) => {
-      startX = e.pageX || e.touches[0].pageX;
+    let startX: number | undefined, scrollLeft: number | undefined;
+    const handleStart = (e: MouseEvent | TouchEvent) => {
+      startX = (e as MouseEvent).pageX || (e as TouchEvent).touches[0].pageX;
       scrollLeft = scrollContainer.scrollLeft;
     };
 
-    const handleMove = (e) => {
-      if (!startX) return;
-      const x = e.pageX || e.touches[0].pageX;
+    const handleMove = (e: MouseEvent | TouchEvent) => {
+      if (startX === undefined || scrollLeft === undefined) return;
+      const x = (e as MouseEvent).pageX || (e as TouchEvent).touches[0].pageX;
       const walk = (x - startX) * 1.5;
       scrollContainer.scrollLeft = scrollLeft - walk;
     };
@@ -46,7 +44,6 @@ export default function Home() {
     scrollContainer.addEventListener("mousedown", handleStart);
     scrollContainer.addEventListener("mousemove", handleMove);
 
-    // Cleanup event listeners to prevent memory leaks
     return () => {
       scrollContainer.removeEventListener("wheel", handleWheel);
       scrollContainer.removeEventListener("touchstart", handleStart);
@@ -57,11 +54,11 @@ export default function Home() {
   }, []);
 
   const scrollLeft = () => {
-    scrollContainerRef.current.scrollBy({ left: -1220, behavior: "smooth" }); // Smooth scroll
+    scrollContainerRef.current?.scrollBy({ left: -1220, behavior: "smooth" });
   };
 
   const scrollRight = () => {
-    scrollContainerRef.current.scrollBy({ left: 1220, behavior: "smooth" }); // Smooth scroll
+    scrollContainerRef.current?.scrollBy({ left: 1220, behavior: "smooth" });
   };
 
   return (
